@@ -27,12 +27,26 @@
     "url": "https://github.com/lob/hapi-bookshelf-total-count/issues"
   },
   "homepage": "https://github.com/lob/hapi-bookshelf-total-count#readme",
+  "peerDependencies": {
+    "bookshelf": ">=0.8.2",
+    "hapi": "11.x"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "joi": "^8.0.5"
+  },
   "devDependencies": {
+    "bookshelf": "^0.9.4",
+    "chai": "^3.0.0",
     "eslint": "^1.9.0",
     "eslint-config-lob": "^2.0.0",
     "generate-changelog": "^1.0.0",
-    "chai": "^3.0.0",
+    "hapi": "^11.1.2",
+    "hapi-query-filter": "^1.0.1",
+    "inject-then": "^2.0.5",
     "istanbul": "^0.4.2",
-    "mocha": "^2.2.5"
+    "knex": "^0.10.0",
+    "mocha": "^2.2.5",
+    "sqlite3": "^3.1.2"
   }
 }

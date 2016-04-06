@@ -1,3 +1,9 @@
 {
-  extends: "lob"
+  extends: "lob",
+  globals: {
+    expect: false
+  },
+  rules: {
+    arrow-body-style: 0
+  }
 }

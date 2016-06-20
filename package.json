@@ -1,6 +1,6 @@
 {
   "name": "hapi-bookshelf-total-count",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Hapi plugin used with Bookshelf models to calculate the total number of records that match a query and appends it to the response",
   "main": "lib/index.js",
   "scripts": {

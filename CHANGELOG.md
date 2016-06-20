@@ -1,3 +1,10 @@
+## 2.0.0 (2016-6-20)
+
+##### Chores
+
+* **hapi-qs:** added hapi-qs as peer-dependency ([7720b887](https://github.com/lob/hapi-bookshelf-total-count/commit/7720b887b8923d4d365b65d3deed4e5da505b501))
+* **deps:** upgrade eslint-config-lob to 2.0.1 ([d1a5635f](https://github.com/lob/hapi-bookshelf-total-count/commit/d1a5635f2747e5eea77f44c02ceaf17b8de8229b))
+
 ## 1.0.0 (2016-4-7)
 
 ##### Documentation Changes

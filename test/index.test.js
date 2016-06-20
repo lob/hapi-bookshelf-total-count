@@ -70,6 +70,7 @@ describe('plugin', () => {
     server.connection({ port: 80 });
     server.register([
       require('inject-then'),
+      require('hapi-qs'),
       {
         register: require('hapi-query-filter'),
         options: { ignoredKeys: ['include'] }

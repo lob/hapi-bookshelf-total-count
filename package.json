@@ -34,7 +34,8 @@
   },
   "dependencies": {
     "bluebird": "^3.3.4",
-    "joi": "^8.0.5"
+    "joi": "^8.0.5",
+    "object-hash": "^1.1.4"
   },
   "devDependencies": {
     "bookshelf": "^0.9.4",
@@ -43,12 +44,14 @@
     "eslint-config-lob": "^2.0.1",
     "generate-changelog": "^1.0.0",
     "hapi": ">=12.x",
-    "hapi-query-filter": "^1.0.1",
     "hapi-qs": "1.x",
+    "hapi-query-filter": "^1.0.1",
     "inject-then": "^2.0.5",
     "istanbul": "^0.4.2",
     "knex": "^0.10.0",
     "mocha": "^2.2.5",
-    "sqlite3": "^3.1.2"
+    "redis": "^2.6.2",
+    "sqlite3": "^3.1.2",
+    "then-redis": "^2.0.1"
   }
 }

@@ -2,15 +2,15 @@
 
 const Joi = require('joi');
 
-const Validator = require('../lib/validator');
+const Validator = require('../../lib/validators/approximate-count');
 
-describe('validator', () => {
+describe('approximate count validator', () => {
 
   const options = { allowUnknown: true };
 
-  it('requires "include" array with total_count', () => {
+  it('requires "include" array with approximate_count', () => {
     const request = {
-      query: { include: ['total_amount'] },
+      query: { include: ['approximate_amount'] },
       response: { source: {} }
     };
     const result = Joi.validate(request, Validator, options);
@@ -20,7 +20,7 @@ describe('validator', () => {
 
   it('requires a response source object', () => {
     const request = {
-      query: { include: ['total_count'] },
+      query: { include: ['approximate_count'] },
       response: { source: null }
     };
     const result = Joi.validate(request, Validator, options);

@@ -1,3 +1,9 @@
+## 3.0.0 (2016-9-22)
+
+##### New Features
+
+* **cache:** adds caching with approximate_count ([f22395c5](https://github.com/lob/hapi-bookshelf-total-count/commit/f22395c5648196d0f2fdbc69ccb2e953d6dfe150))
+
 ## 2.0.0 (2016-6-20)
 
 ##### Chores

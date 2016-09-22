@@ -23,7 +23,7 @@ server.register([
 ### Configure the endpoint
 
 ```js
-const Bookshelf = require('bluebird')(require('knex')(config));
+const Bookshelf = require('bookshelf')(require('knex')(config));
 
 const Book = Bookshelf.Model.extend({ tableName: 'books' });
 
@@ -42,7 +42,6 @@ server.route({
     }
   }
 });
-
 ```
 
 ### Request
@@ -87,7 +86,7 @@ server.register([
 ```js
 // models/book.js
 
-const Bookshelf = require('bluebird')(require('knex')(config));
+const Bookshelf = require('bookshelf')(require('knex')(config));
 
 module.exports = Bookshelf.Model.extend({
   tableName: 'books'
@@ -144,5 +143,101 @@ $ curl -g GET "https://YOUR_DOMAIN/books?year=1984&include[]=total_count"
 {
   "data": [...],
   "total_count": 20
+}
+```
+
+## Approximate Total Count
+
+Appends the `approximate_count` which is a cached total count. Currently only Redis is supported as a cache. Both
+requests that fetch the `total_count` and `approximate_count` will prime the cache.
+
+### Register the Plugin
+
+```js
+const Hapi = require('hapi');
+
+const Redis = require('then-redis').createClient({
+  port: '6379',
+  host: 'localhost'
+});
+
+const server = new Hapi.Server();
+
+server.register([
+  {
+    register: require('hapi-bookshelf-total-count'),
+    options: {
+      redisClient: Redis,
+      ttl: (count) => count / 10, // a function which returns the TTL to set for the cached approximate count
+      uniqueKey: (request) => request.auth.credentials.api_key // an optional function to add additional uniqueness to the cache key
+    }
+  }
+], (err) => {
+
+});
+```
+
+### Define a filter function on the model
+
+```js
+// models/book.js
+
+const Bookshelf = require('bookshelf')(require('knex')(config));
+
+module.exports = Bookshelf.Model.extend({
+  tableName: 'books'
+  /**
+   * @param {Object} filter - from request.query.filter
+   * @param {Object} [credentials] - from request.auth.credentials
+   * You may add any additional parameters after filter and credentials
+   */
+  filter: function (filter, credentials) {
+    return this.query((qb) => {
+      qb.where('deleted', false);
+
+      if (filter.year) {
+        qb.where('year', filter.year);
+      }
+    });
+  }
+});
+```
+
+### Configure the endpoint
+
+```js
+const Book = require('../models/book');
+
+server.route({
+  method: 'GET',
+  path: '/books',
+  config: {
+    plugins: {
+      queryFilter: { enabled: true },
+      totalCount: { model: Book }
+    },
+    handler: (request, reply) => {
+      return new Book().filter(request.query.filter, request.auth.credentials)
+      .fetchAll()
+      .then((books) => {
+        reply({ data: books });
+      });
+    }
+  }
+});
+```
+
+### Request
+
+```bash
+$ curl -g GET "https://YOUR_DOMAIN/books?year=1984&include[]=approximate_count"
+```
+
+### Response
+
+```
+{
+  "data": [...],
+  "approximate_count": 20
 }
 ```

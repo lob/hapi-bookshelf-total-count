@@ -154,9 +154,14 @@ requests that fetch the `total_count` and `approximate_count` will prime the cac
 ### Register the Plugin
 
 ```js
-const Hapi = require('hapi');
+const Bluebird = require('bluebird');
+const Hapi     = require('hapi');
+const Redis    = require('redis');
 
-const Redis = require('then-redis').createClient({
+Bluebird.promisifyAll(Redis.RedisClient.prototype);
+Bluebird.promisifyAll(Redis.Multi.prototype);
+
+const RedisClient = Redis.createClient({
   port: '6379',
   host: 'localhost'
 });
@@ -167,7 +172,7 @@ server.register([
   {
     register: require('hapi-bookshelf-total-count'),
     options: {
-      redisClient: Redis,
+      redisClient: RedisClient,
       ttl: (count) => count / 10, // a function which returns the TTL to set for the cached approximate count
       uniqueKey: (request) => request.auth.credentials.api_key // an optional function to add additional uniqueness to the cache key
     }

@@ -37,8 +37,8 @@ describe('counter', () => {
       return Counter.count(Book, request, Redis, key, ttl)
       .then(() => {
         return Bluebird.all([
-          Redis.get(key),
-          Redis.ttl(key)
+          Redis.getAsync(key),
+          Redis.ttlAsync(key)
         ]);
       })
       .spread((cachedCount, cachedTtl) => {

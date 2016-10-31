@@ -1,3 +1,9 @@
+## 4.0.0 (2016-10-31)
+
+##### New Features
+
+* **redis:** removes dependence on then-redis ([0b4ddb0a](https://github.com/lob/hapi-bookshelf-total-count/commit/0b4ddb0ad93685b089087c80bc35eafdc393dca9))
+
 ## 3.0.0 (2016-9-22)
 
 ##### New Features

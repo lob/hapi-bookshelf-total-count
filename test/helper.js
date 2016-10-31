@@ -37,5 +37,5 @@ beforeEach(() => {
       ])
     ]);
   })
-  .then(() => Redis.flushall());
+  .then(() => Redis.flushallAsync());
 });

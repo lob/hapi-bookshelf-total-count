@@ -93,7 +93,7 @@ describe('plugin', () => {
       }
     });
 
-    return Redis.set('hapi-bookshelf-total-count:books:unique:dd82f1d2fe8efa0793df67c43cf9a0f775b0eca1', 12345)
+    return Redis.setAsync('hapi-bookshelf-total-count:books:unique:dd82f1d2fe8efa0793df67c43cf9a0f775b0eca1', 12345)
     .then(() => {
       return server.injectThen({
         method: 'GET',
@@ -125,7 +125,7 @@ describe('plugin', () => {
       credentials: {}
     })
     .then(() => {
-      return Redis.get('hapi-bookshelf-total-count:books:unique:dd82f1d2fe8efa0793df67c43cf9a0f775b0eca1');
+      return Redis.getAsync('hapi-bookshelf-total-count:books:unique:dd82f1d2fe8efa0793df67c43cf9a0f775b0eca1');
     })
     .then((count) => {
       expect(count).to.eql('2');
@@ -151,7 +151,7 @@ describe('plugin', () => {
       credentials: {}
     })
     .then(() => {
-      return Redis.get('hapi-bookshelf-total-count:books:unique:dd82f1d2fe8efa0793df67c43cf9a0f775b0eca1');
+      return Redis.getAsync('hapi-bookshelf-total-count:books:unique:dd82f1d2fe8efa0793df67c43cf9a0f775b0eca1');
     })
     .then((count) => {
       expect(count).to.eql('2');

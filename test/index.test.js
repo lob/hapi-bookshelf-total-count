@@ -58,6 +58,58 @@ describe('plugin', () => {
     });
   });
 
+  it('does not include approximate count if only total count is specified in include field in the plugin', () => {
+    server.route({
+      method: 'GET',
+      path: '/books',
+      config: {
+        plugins: {
+          queryFilter: { enabled: true },
+          totalCount: {
+            include: ['total'],
+            model: Book
+          }
+        },
+        handler
+      }
+    });
+
+    return server.injectThen({
+      method: 'GET',
+      url: '/books?year=1984&include[]=approximate_count',
+      credentials: {}
+    })
+    .then((res) => {
+      expect(res.result.approximate_count).to.be.undefined;
+    });
+  });
+
+  it('does not include total count if only approximate count is specified in include field in the plugin', () => {
+    server.route({
+      method: 'GET',
+      path: '/books',
+      config: {
+        plugins: {
+          queryFilter: { enabled: true },
+          totalCount: {
+            include: ['approximate'],
+            model: Book
+          }
+        },
+        handler
+      }
+    });
+
+    return server.injectThen({
+      method: 'GET',
+      url: '/books?year=1984&include[]=total_count',
+      credentials: {}
+    })
+    .then((res) => {
+      expect(res.result.total_count).to.be.undefined;
+    });
+  });
+
   it('appends the total for models that do not have a filter function', () => {
     server.route({
       method: 'GET',

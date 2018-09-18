@@ -232,6 +232,33 @@ server.route({
 });
 ```
 
+### include option - use this option to restrict counting to only the included items in the list
+
+```js
+const Book = require('../models/book');
+
+server.route({
+  method: 'GET',
+  path: '/books',
+  config: {
+    plugins: {
+      queryFilter: { enabled: true },
+      totalCount: { 
+        include: ['approximate'],
+        model: Book 
+      }
+    },
+    handler: (request, reply) => {
+      return new Book().filter(request.query.filter, request.auth.credentials)
+      .fetchAll()
+      .then((books) => {
+        reply({ data: books });
+      });
+    }
+  }
+});
+```
+
 ### Request
 
 ```bash

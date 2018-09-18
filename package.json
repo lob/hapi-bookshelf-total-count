@@ -29,7 +29,7 @@
   "homepage": "https://github.com/lob/hapi-bookshelf-total-count#readme",
   "peerDependencies": {
     "bookshelf": ">=0.8.2",
-    "hapi": ">=12.x",
+    "hapi": "^16.0.0",
     "hapi-qs": "1.x"
   },
   "dependencies": {
@@ -43,7 +43,7 @@
     "eslint": "^1.9.0",
     "eslint-config-lob": "^2.0.1",
     "generate-changelog": "^1.0.0",
-    "hapi": ">=12.x",
+    "hapi": "^16.0.0",
     "hapi-qs": "1.x",
     "hapi-query-filter": "^1.0.1",
     "inject-then": "^2.0.5",

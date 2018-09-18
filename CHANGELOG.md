@@ -1,3 +1,15 @@
+### 4.1.0 (2018-09-18)
+
+##### New Features
+
+* **include_flag:**
+  *  upgrade node version and set explicit hapi version ([45fb9e88](https://github.com/lob/hapi-bookshelf-total-count/commit/45fb9e8820fca3612a6d07b335886642d12bfdd0))
+  *  add flag to restrict counts computed from the plugin ([94864d65](https://github.com/lob/hapi-bookshelf-total-count/commit/94864d651a07b4c1be524e4462ff0e67c929fefc))
+
+##### Bug Fixes
+
+* **total_count_performance:**  update readme ([c124eb80](https://github.com/lob/hapi-bookshelf-total-count/commit/c124eb80ec2cac77708efd214214e12a28774f33))
+
 ## 4.0.0 (2016-10-31)
 
 ##### New Features

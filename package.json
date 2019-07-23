@@ -30,11 +30,11 @@
   "peerDependencies": {
     "bookshelf": ">=0.8.2",
     "hapi": "^16.0.0",
-    "hapi-qs": "1.x"
+    "hapi-qs": "1.x",
+    "joi": "^11.4.0"
   },
   "dependencies": {
     "bluebird": "^3.3.4",
-    "joi": "^8.0.5",
     "object-hash": "^1.1.4"
   },
   "devDependencies": {
@@ -48,6 +48,7 @@
     "hapi-query-filter": "^1.0.1",
     "inject-then": "^2.0.5",
     "istanbul": "^0.4.2",
+    "joi": "^11.4.0",
     "knex": "^0.10.0",
     "mocha": "^2.2.5",
     "redis": "^2.6.2",

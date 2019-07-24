@@ -1,3 +1,9 @@
+### 4.3.0 (2019-07-24)
+
+##### Chores
+
+* **deps:**  Bump dependency versions to sync with lob-api ([8b79407a](https://github.com/lob/hapi-bookshelf-total-count/commit/8b79407a41babaec77debc9d740144c9bca83c78))
+
 ### 4.2.0 (2019-07-24)
 
 ##### Chores

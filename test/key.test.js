@@ -19,7 +19,7 @@ describe('key', () => {
 
     it('adds a unique key if a function is provided', () => {
       const uniqueKey = () => 'unique';
-      expect(Key.generate(Genre, {}, uniqueKey)).to.eql(`hapi-bookshelf-total-count:genres:unique:`);
+      expect(Key.generate(Genre, {}, uniqueKey)).to.eql('hapi-bookshelf-total-count:genres:unique:');
     });
 
     it('returns identical keys for filter objects that are equivalent in value but not order', () => {

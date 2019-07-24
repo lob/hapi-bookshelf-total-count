@@ -1,3 +1,9 @@
+### 4.2.0 (2019-07-24)
+
+##### Chores
+
+* **versions:**  Move Joi to a peer dependency ([6afb8119](https://github.com/lob/hapi-bookshelf-total-count/commit/6afb8119d397274c147ae7b950c50c8d18423c88))
+
 ### 4.1.0 (2018-09-18)
 
 ##### New Features

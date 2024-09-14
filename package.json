@@ -1,6 +1,6 @@
 {
   "name": "hapi-bookshelf-total-count",
-  "version": "4.3.0",
+  "version": "5.0.0",
   "description": "Hapi plugin used with Bookshelf models to calculate the total number of records that match a query and appends it to the response",
   "main": "lib/index.js",
   "scripts": {
@@ -28,31 +28,34 @@
   },
   "homepage": "https://github.com/lob/hapi-bookshelf-total-count#readme",
   "peerDependencies": {
-    "bookshelf": ">=0.8.2",
-    "hapi": "^16.0.0",
-    "hapi-qs": "1.x",
-    "joi": "^11.4.0"
+    "@hapi/hapi": "^21.3.10",
+    "bookshelf": ">=1.2.0",
+    "joi": "^17.13.3"
+  },
+  "overrides": {
+    "bookshelf": {
+      "knex": "^3.1.0"
+    }
   },
   "dependencies": {
-    "bluebird": "^3.3.4",
-    "object-hash": "^1.1.4"
+    "object-hash": "^1.1.4",
+    "rimraf": "^6.0.1"
   },
   "devDependencies": {
-    "bookshelf": "^0.12.0",
-    "chai": "^4.1.2",
-    "eslint": "^4.19.1",
-    "eslint-config-lob": "^3.0.0",
-    "generate-changelog": "^1.0.0",
-    "hapi": "^16.0.0",
-    "hapi-qs": "1.x",
-    "hapi-query-filter": "^1.0.1",
-    "inject-then": "^2.0.5",
-    "joi": "^11.4.0",
-    "knex": "^0.14.5",
-    "mocha": "^5.2.0",
+    "@hapi/hapi": "^21.3.10",
+    "bookshelf": "^1.2.0",
+    "chai": "4.5.0",
+    "eslint": "8.57.0",
+    "eslint-config-lob": "^6.0.0",
+    "generate-changelog": "^1.8.0",
+    "hapi-query-filter": "^5.0.0",
+    "joi": "^17.13.3",
+    "knex": "^3.1.0",
+    "mocha": "^10.7.3",
     "nyc": "^14.1.1",
-    "redis": "^2.6.2",
-    "sqlite3": "^5.0.2"
+    "qs": "^6.13.0",
+    "redis": "^4.7.0",
+    "sqlite3": "^5.1.7"
   },
   "nyc": {
     "lines": 100,

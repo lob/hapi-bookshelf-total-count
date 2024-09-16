@@ -1,7 +1,5 @@
 'use strict';
 
-const Joi = require('joi');
-
 const Validator = require('../../lib/validators/approximate-count');
 
 describe('approximate count validator', () => {

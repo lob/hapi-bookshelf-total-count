@@ -1,7 +1,5 @@
 'use strict';
 
-const Joi = require('joi');
-
 const Validator = require('../../lib/validators/total-count');
 
 describe('total count validator', () => {

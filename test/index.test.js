@@ -29,7 +29,7 @@ describe('plugin', () => {
           // replaces hapi-qs
           return QS.parse(query);
         }
-      },
+      }
     });
 
     await server.register([

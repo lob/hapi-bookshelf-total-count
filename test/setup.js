@@ -3,7 +3,6 @@
 const Chai = require('chai');
 const Knex  = require('./helpers/knex');
 const Redis = require('./helpers/redis');
-const rimraf = require('rimraf');
 
 global.expect = Chai.expect;
 

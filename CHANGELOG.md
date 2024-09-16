@@ -1,3 +1,11 @@
+### 5.0.0 (2024-09-16)
+
+* Update to use [@hapi/hapi](https://www.npmjs.com/package/@hapi/hapi) package, replaces deprecated [hapi](https://www.npmjs.com/package/hapi) package in peer dependencies.
+
+#### BREAKING CHANGES
+
+* Dropped support for deprecated [hapi](https://www.npmjs.com/package/hapi) package
+
 ### 4.3.0 (2019-07-24)
 
 ##### Chores

@@ -1,7 +1,5 @@
 'use strict';
 
-const Joi = require('joi');
-
 const Validator = require('../../lib/validators/total-count');
 
 describe('total count validator', () => {
@@ -13,9 +11,9 @@ describe('total count validator', () => {
       query: { include: ['total_amount'] },
       response: { source: {} }
     };
-    const result = Joi.validate(request, Validator, options);
+    const result = Validator.validate(request, options);
 
-    expect(result.error).to.match(/"include" does not contain 1 required value/);
+    expect(result.error).to.match(/"query.include" does not contain 1 required value/);
   });
 
   it('requires a response source object', () => {
@@ -23,9 +21,9 @@ describe('total count validator', () => {
       query: { include: ['total_count'] },
       response: { source: null }
     };
-    const result = Joi.validate(request, Validator, options);
+    const result = Validator.validate(request, options);
 
-    expect(result.error).to.match(/"source" must be an object/);
+    expect(result.error).to.match(/"response.source" must be of type object/);
   });
 
 });

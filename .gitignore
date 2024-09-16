@@ -34,3 +34,8 @@ node_modules
 
 # SQLite databases
 *.sqlite3
+
+.idea/
+
+.nyc_output/
+.DS_Store

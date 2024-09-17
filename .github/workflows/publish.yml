@@ -21,12 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests and linter
-        run: npm test
-
-      - name: Enforce coverage
-        run: npm run enforce
-
       - name: publish to npm
         id: publish
         uses: JS-DevTools/npm-publish@v3

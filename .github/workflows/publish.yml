@@ -7,7 +7,7 @@ on:
 jobs:
   publish:
     name: Publish release to npm
-    runs-on: [self-hosted, lob-runner, x64, Linux]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout

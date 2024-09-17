@@ -1,0 +1,36 @@
+name: "Publish to npm"
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    name: Publish release to npm
+    runs-on: [self-hosted, lob-runner, x64, Linux]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests and linter
+        run: npm test
+
+      - name: Enforce coverage
+        run: npm run enforce
+
+      - name: publish to npm
+        id: publish
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+
+

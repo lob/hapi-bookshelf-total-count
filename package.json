@@ -8,9 +8,10 @@
     "lint": "eslint .",
     "test": "nyc _mocha test --exit --require test/setup.js --recursive --timeout 30000",
     "test:raw": "mocha test --require test/setup.js --recursive --timeout 30000",
-    "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
-    "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
-    "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
+    "changelog:patch": "changelog -p",
+    "changelog:minor": "changelog -m",
+    "changelog:major": "changelog -M",
+    "version:commit": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,10 @@
     "url": "https://github.com/lob/hapi-bookshelf-total-count/issues"
   },
   "homepage": "https://github.com/lob/hapi-bookshelf-total-count#readme",
+  "engines": {
+    "node": ">=20.17.0",
+    "npm": ">=11.5.1"
+  },
   "peerDependencies": {
     "@hapi/hapi": "^21.3.10",
     "bookshelf": ">=1.2.0",

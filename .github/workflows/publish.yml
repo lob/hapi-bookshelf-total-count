@@ -1,30 +1,61 @@
-name: "Publish to npm"
+name: NPM Publish
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      version:
+        type: choice
+        description: Version type
+        required: true
+        options:
+          - "patch"
+          - "minor"
+          - "major"
+        default: "patch"
 
 jobs:
   publish:
-    name: Publish release to npm
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write # Required for publishing using OIDC authentication
+      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Use Node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
+          cache: 'npm'
+
+      - name: Upgrade npm to v11
+        run: npm install -g npm@11
 
       - name: Install dependencies
         run: npm install
 
-      - name: publish to npm
-        id: publish
-        uses: JS-DevTools/npm-publish@v3
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
+      - name: Run tests and linter
+        run: npm test
 
+      - name: Enforce coverage
+        run: npm run enforce
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "no-reply@lob.com"
+          git config --global user.name "NPM Publish Action"
+
+      - name: Generate changelog
+        run: npm run changelog:${{ github.event.inputs.version }}
+
+      - name: Commit changelog
+        run: npm run version:commit
+
+      - name: Bump version
+        run: npm version "${{ github.event.inputs.version }}"
+
+      - name: Publish package
+        uses: JS-DevTools/npm-publish@v4
+
+      - name: Push changes to Github
+        run: git push --follow-tags

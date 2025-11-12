@@ -1,3 +1,5 @@
+### 5.1.0 (2025-11-12)
+
 ### 5.0.0 (2024-09-16)
 
 * Update to use [@hapi/hapi](https://www.npmjs.com/package/@hapi/hapi) package, replaces deprecated [hapi](https://www.npmjs.com/package/hapi) package in peer dependencies.

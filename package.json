@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/lob/hapi-bookshelf-total-count#readme",
   "engines": {
-    "node": ">=20.17.0",
+    "node": ">=24.19.0",
     "npm": ">=11.5.1"
   },
   "peerDependencies": {

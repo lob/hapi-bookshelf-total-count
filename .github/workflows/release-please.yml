@@ -1,5 +1,15 @@
 name: release-please
 
+# This computes version bumps and changelog entries from commit messages, so
+# PR titles need to follow Conventional Commits (https://www.conventionalcommits.org/):
+# `fix: ...` for a patch, `feat: ...` for a minor, `feat!: ...` or a
+# `BREAKING CHANGE:` footer for a major. This repo squash-merges everything,
+# and squash commit messages here come from the PR title, so the PR title is
+# what actually matters, not the commit messages inside the PR.
+# `chore:`, `docs:`, etc. are recognized but don't trigger a release.
+# The old `bug(...)` prefix used on some past PRs is not a Conventional
+# Commits type, so a PR titled that way won't register as a fix.
+
 on:
   push:
     branches:

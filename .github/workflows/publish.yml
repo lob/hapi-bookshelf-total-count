@@ -1,24 +1,15 @@
 name: NPM Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        type: choice
-        description: Version type
-        required: true
-        options:
-          - "patch"
-          - "minor"
-          - "major"
-        default: "patch"
+  release:
+    types: [published]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Required for publishing using OIDC authentication
-      contents: write
+      contents: read
 
     services:
       redis:
@@ -35,6 +26,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -46,30 +39,13 @@ jobs:
         run: npm install -g npm@11
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Run tests and linter
+      - name: Run tests
         run: npm test
 
       - name: Enforce coverage
         run: npm run enforce
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "no-reply@lob.com"
-          git config --global user.name "NPM Publish Action"
-
-      - name: Generate changelog
-        run: npm run changelog:${{ github.event.inputs.version }}
-
-      - name: Commit changelog
-        run: npm run version:commit
-
-      - name: Bump version
-        run: npm version "${{ github.event.inputs.version }}"
-
       - name: Publish package
         uses: JS-DevTools/npm-publish@v4
-
-      - name: Push changes to Github
-        run: git push --follow-tags

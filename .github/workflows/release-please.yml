@@ -1,0 +1,27 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      # NOTE: this uses the default GITHUB_TOKEN, which means pushes/PRs it
+      # creates will not automatically trigger this repo's CI workflow (GitHub
+      # does not chain workflow runs off the default token, to prevent
+      # accidental infinite loops). This repo's branch protection does not
+      # currently require passing status checks to merge, so this isn't a
+      # hard blocker, but if you want a fresh CI run on the release PR before
+      # merging it, either push an empty commit to it or re-run CI manually.
+      # To get CI to trigger automatically instead, swap this for a
+      # fine-grained PAT or GitHub App token stored as a repo secret.
+      - uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

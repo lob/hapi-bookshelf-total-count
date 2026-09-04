@@ -1,3 +1,27 @@
+#### 5.1.1 (2026-09-04)
+
+##### Chores
+
+* **SYN-633:**
+  *  harden the release workflows per code review ([0cd3e758](https://github.com/lob/hapi-bookshelf-total-count/commit/0cd3e758176682dbf1946c1534389d5173b5865d))
+  *  replace release-please with PR-then-publish, keeping the original manual patch/minor/major workflow ([188448f0](https://github.com/lob/hapi-bookshelf-total-count/commit/188448f0cb5812e3a232f6c13dfa46caf4dc1a4b))
+  *  add .npmignore to stop shipping CI config, tests, and lint config to npm ([fa33b470](https://github.com/lob/hapi-bookshelf-total-count/commit/fa33b470e3b5dbc14c412de7fdd4775273b34924))
+  *  fix release-please tag naming to match existing v-prefixed tags ([529b7502](https://github.com/lob/hapi-bookshelf-total-count/commit/529b7502e6fdbd75316c55f463ad6f9bfee2f844))
+  *  replace manual npm publish workflow with release-please ([0cf76c33](https://github.com/lob/hapi-bookshelf-total-count/commit/0cf76c338e936b33d76f3b3076354144438098e2))
+
+##### Documentation Changes
+
+* **SYN-633:**  document the Conventional Commits / squash-title requirement in-repo ([be0839c9](https://github.com/lob/hapi-bookshelf-total-count/commit/be0839c91761b1680fc1474c50018b875663bed9))
+
+##### Bug Fixes
+
+* **SYN-633:**  retroactively mark the dependency vuln fix as release-worthy ([abbc02a1](https://github.com/lob/hapi-bookshelf-total-count/commit/abbc02a1b570ca7cd6624b0109b8d918e1a57623))
+
+##### Other Changes
+
+*  bring v5.1.0 tag into ancestry ([5483697f](https://github.com/lob/hapi-bookshelf-total-count/commit/5483697f93d6b70fade7749850a56055e1a8d541))
+*  Clear all high-severity npm audit findings ([#51](https://github.com/lob/hapi-bookshelf-total-count/pull/51)) ([5b108eb9](https://github.com/lob/hapi-bookshelf-total-count/commit/5b108eb94ad93135df92366e2dc34007847c0fbd))
+
 ### 5.1.0 (2025-11-12)
 
 ### 5.0.0 (2024-09-16)

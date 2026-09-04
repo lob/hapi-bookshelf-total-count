@@ -5,9 +5,17 @@ on:
     types: [closed]
     branches: [main]
 
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
 jobs:
   publish:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    # Branch prefix + label together so an unrelated release/* PR can't trigger a publish.
+    if: >-
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release/') &&
+      contains(github.event.pull_request.labels.*.name, 'automated-release')
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Required for publishing using OIDC authentication
@@ -29,7 +37,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          # Pin to the merge commit, not main's tip, which could move if another release merges first.
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -52,6 +61,7 @@ jobs:
       - name: Publish package
         uses: JS-DevTools/npm-publish@v4
 
+      # If this fails, the package is live but untagged, a manual git tag/push away from fixed.
       - name: Tag the release
         run: |
           VERSION=$(node -p "require('./package.json').version")

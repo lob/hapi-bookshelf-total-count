@@ -6,7 +6,7 @@
   "scripts": {
     "enforce": "nyc check-coverage",
     "lint": "eslint .",
-    "test": "nyc _mocha test --exit --require test/setup.js --recursive --timeout 30000",
+    "test": "nyc mocha test --exit --require test/setup.js --recursive --timeout 30000",
     "test:raw": "mocha test --require test/setup.js --recursive --timeout 30000",
     "changelog:patch": "changelog -p",
     "changelog:minor": "changelog -m",
@@ -56,11 +56,11 @@
     "hapi-query-filter": "^5.0.0",
     "joi": "^17.13.3",
     "knex": "^3.1.0",
-    "mocha": "^10.7.3",
-    "nyc": "^14.1.1",
+    "mocha": "^12.0.0",
+    "nyc": "^18.0.0",
     "qs": "^6.13.0",
     "redis": "^4.7.0",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^6.0.1"
   },
   "nyc": {
     "lines": 100,

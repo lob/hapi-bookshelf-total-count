@@ -1,0 +1,33 @@
+# .npmignore replaces .gitignore for what npm publishes, it doesn't add to
+# it, so the build-artifact excludes below are copied over from .gitignore
+# to keep them out of the published package too.
+logs
+*.log
+npm-debug.log*
+pids
+*.pid
+*.seed
+lib-cov
+coverage
+.grunt
+.lock-wscript
+build/Release
+node_modules
+.npm
+.node_repl_history
+*.sqlite3
+.idea/
+.nyc_output/
+.DS_Store
+.claude/
+
+# Excluded from the published package itself, consumers don't need CI config,
+# tests, lint/editor config, or the local dev DB setup.
+.github/
+test/
+.eslintrc
+.eslintignore
+.node-version
+docker-compose.yml
+release-please-config.json
+.release-please-manifest.json

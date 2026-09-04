@@ -1,24 +1,25 @@
 name: NPM Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        type: choice
-        description: Version type
-        required: true
-        options:
-          - "patch"
-          - "minor"
-          - "major"
-        default: "patch"
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
 
 jobs:
   publish:
+    # Branch prefix + label together so an unrelated release/* PR can't trigger a publish.
+    if: >-
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release/') &&
+      contains(github.event.pull_request.labels.*.name, 'automated-release')
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Required for publishing using OIDC authentication
-      contents: write
+      contents: write # Required to push the release tag (tags aren't branch-protected)
 
     services:
       redis:
@@ -35,6 +36,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Pin to the merge commit, not main's tip, which could move if another release merges first.
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -46,30 +50,20 @@ jobs:
         run: npm install -g npm@11
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Run tests and linter
+      - name: Run tests
         run: npm test
 
       - name: Enforce coverage
         run: npm run enforce
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "no-reply@lob.com"
-          git config --global user.name "NPM Publish Action"
-
-      - name: Generate changelog
-        run: npm run changelog:${{ github.event.inputs.version }}
-
-      - name: Commit changelog
-        run: npm run version:commit
-
-      - name: Bump version
-        run: npm version "${{ github.event.inputs.version }}"
-
       - name: Publish package
         uses: JS-DevTools/npm-publish@v4
 
-      - name: Push changes to Github
-        run: git push --follow-tags
+      # If this fails, the package is live but untagged, a manual git tag/push away from fixed.
+      - name: Tag the release
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag "v$VERSION"
+          git push origin "v$VERSION"

@@ -1,6 +1,6 @@
 {
   "name": "hapi-bookshelf-total-count",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Hapi plugin used with Bookshelf models to calculate the total number of records that match a query and appends it to the response",
   "main": "lib/index.js",
   "scripts": {
@@ -10,8 +10,7 @@
     "test:raw": "mocha test --require test/setup.js --recursive --timeout 30000",
     "changelog:patch": "changelog -p",
     "changelog:minor": "changelog -m",
-    "changelog:major": "changelog -M",
-    "version:commit": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'"
+    "changelog:major": "changelog -M"
   },
   "repository": {
     "type": "git",

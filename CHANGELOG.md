@@ -1,3 +1,16 @@
+#### 5.1.1 (2026-09-04)
+
+##### Chores
+
+* **deps-dev:**
+  *  bump tar-fs from 2.1.1 to 2.1.4 ([#41](https://github.com/lob/hapi-bookshelf-total-count/pull/41)) ([2515e89c](https://github.com/lob/hapi-bookshelf-total-count/commit/2515e89c700228e10a00abcbb08b36951fd09c13))
+  *  bump brace-expansion from 1.1.11 to 1.1.12 ([#43](https://github.com/lob/hapi-bookshelf-total-count/pull/43)) ([687134c6](https://github.com/lob/hapi-bookshelf-total-count/commit/687134c6d4d55984ac2864d259b1031eb8ca3149))
+
+##### Other Changes
+
+*  Fix npm publish workflow ([#53](https://github.com/lob/hapi-bookshelf-total-count/pull/53)) ([5f5b73ba](https://github.com/lob/hapi-bookshelf-total-count/commit/5f5b73ba08ad9a9081f0930674cf97509d72e8c6))
+*  Clear all high-severity npm audit findings ([#51](https://github.com/lob/hapi-bookshelf-total-count/pull/51)) ([5b108eb9](https://github.com/lob/hapi-bookshelf-total-count/commit/5b108eb94ad93135df92366e2dc34007847c0fbd))
+
 ### 5.1.0 (2025-11-12)
 
 ### 5.0.0 (2024-09-16)

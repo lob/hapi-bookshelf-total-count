@@ -1,0 +1,62 @@
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: choice
+        description: Version type
+        required: true
+        options:
+          - "patch"
+          - "minor"
+          - "major"
+        default: "patch"
+
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'npm'
+
+      - name: Upgrade npm to v11
+        run: npm install -g npm@11
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate changelog
+        run: npm run changelog:${{ github.event.inputs.version }}
+
+      - name: Bump version (no commit or tag yet, that happens after this PR merges)
+        run: npm version "${{ github.event.inputs.version }}" --no-git-tag-version
+
+      - name: Read new version
+        id: new_version
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Open release PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config --global user.email "no-reply@lob.com"
+          git config --global user.name "NPM Publish Action"
+          git checkout -b "release/${{ steps.new_version.outputs.version }}"
+          git add package.json package-lock.json CHANGELOG.md
+          git commit -m "chore: release v${{ steps.new_version.outputs.version }}"
+          git push origin "release/${{ steps.new_version.outputs.version }}"
+          gh pr create \
+            --title "chore: release v${{ steps.new_version.outputs.version }}" \
+            --body "Version bump and changelog for v${{ steps.new_version.outputs.version }}, opened by the Prepare Release workflow. Merging this triggers the actual npm publish." \
+            --base main \
+            --head "release/${{ steps.new_version.outputs.version }}"

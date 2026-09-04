@@ -29,5 +29,3 @@ test/
 .eslintignore
 .node-version
 docker-compose.yml
-release-please-config.json
-.release-please-manifest.json

@@ -1,15 +1,17 @@
 name: NPM Publish
 
 on:
-  release:
-    types: [published]
+  pull_request:
+    types: [closed]
+    branches: [main]
 
 jobs:
   publish:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Required for publishing using OIDC authentication
-      contents: read
+      contents: write # Required to push the release tag (tags aren't branch-protected)
 
     services:
       redis:
@@ -27,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: main
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -49,3 +51,9 @@ jobs:
 
       - name: Publish package
         uses: JS-DevTools/npm-publish@v4
+
+      - name: Tag the release
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
